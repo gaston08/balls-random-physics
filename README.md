@@ -6,7 +6,7 @@ Balls Random Physics is an application that lets you generate random balls using
 [https://balls-random-physics.netlify.app/](https://balls-random-physics.netlify.app/)
 
 ### Build with
-- [React](https://react.dev/)
+- [React](https://react.dev/) + [Typescript](https://www.typescriptlang.org/)
 - [React three fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
 - [Vite](https://vitejs.dev/)
 - [Cannon-es](https://github.com/pmndrs/cannon-es)
