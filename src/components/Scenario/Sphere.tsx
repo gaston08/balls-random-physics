@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 export default function Sphere({ randomScale, body, material }) {
 	const meshRef = useRef();
 
-	useFrame((state) => {
+	useFrame(() => {
 		meshRef.current.position.x = body.position.x;
 		meshRef.current.position.y = body.position.y;
 		meshRef.current.position.z = body.position.z;

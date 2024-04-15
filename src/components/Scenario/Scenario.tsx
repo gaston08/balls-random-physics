@@ -1,21 +1,12 @@
 import * as THREE from "three";
-import * as CANNON from "cannon-es";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import { Stats, OrbitControls, Environment } from "@react-three/drei";
-import { Suspense, useMemo, useRef, useEffect, useState } from "react";
-import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import TWEEN from "@tweenjs/tween.js";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Stats, OrbitControls } from "@react-three/drei";
+import { Suspense, useMemo, useState } from "react";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { useControls, button } from "leva";
 import { Html, useProgress } from "@react-three/drei";
-import CannonDebugger from "cannon-es-debugger";
-import {
-	getRandomArbitrary,
-	playSound,
-	createWorld,
-	defaultMaterial,
-	getSphere,
-} from "./utils";
+//import CannonDebugger from "cannon-es-debugger";
+import { createWorld, getSphere } from "./utils";
 import Sphere from "./Sphere";
 
 function Loader() {
@@ -24,21 +15,18 @@ function Loader() {
 }
 
 function MapScenario() {
-	const ref = useRef();
-	const [world, setWorld] = useState(() => {
-		return createWorld();
-	});
+	const world = useMemo(() => createWorld(), []);
 	const [spheres, setSpheres] = useState([]);
-	const [cannonDebugger, setCannonDebugger] = useState({});
-	const { scene } = useThree();
+	//const [cannonDebugger, setCannonDebugger] = useState({});
+	//const { scene } = useThree();
 
-	useEffect(() => {
+	/*useEffect(() => {
 		if (world) {
 			setCannonDebugger(() => {
 				return new CannonDebugger(scene, world, {});
 			});
 		}
-	}, [world]);
+	}, [world]);*/
 
 	useControls("Spheres", {
 		"Random texture": button(() => {
@@ -234,23 +222,17 @@ function MapScenario() {
 }
 
 export default function Scenario() {
-	const [loading, setLoading] = useState(false);
-
 	return (
 		<>
-			{loading ? (
-				<h1>Cargando...</h1>
-			) : (
-				<Canvas camera={{ position: [1.5, 1.5, 1.5] }} shadows>
-					<Suspense fallback={<Loader />}>
-						<MapScenario />
-					</Suspense>
-					<OrbitControls target={[0, 0, 0]} enableDamping={false} />
-					<Stats />
-					<ambientLight args={[0xffffff, 3]} />
-					<directionalLight castShadow position={[-4, 4, 2]} intensity={4} />
-				</Canvas>
-			)}
+			<Canvas camera={{ position: [1.5, 1.5, 1.5] }} shadows>
+				<Suspense fallback={<Loader />}>
+					<MapScenario />
+				</Suspense>
+				<OrbitControls target={[0, 0, 0]} enableDamping={false} />
+				<Stats />
+				<ambientLight args={[0xffffff, 3]} />
+				<directionalLight castShadow position={[-4, 4, 2]} intensity={4} />
+			</Canvas>
 		</>
 	);
 }

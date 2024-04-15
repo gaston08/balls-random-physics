@@ -95,7 +95,7 @@ export const createWorld = () => {
 };
 
 export const getSphere = () => {
-	let randomScale = getRandomArbitrary(0.1, 0.3);
+	const randomScale = getRandomArbitrary(0.1, 0.3);
 
 	const body = new CANNON.Body({
 		mass: randomScale,
